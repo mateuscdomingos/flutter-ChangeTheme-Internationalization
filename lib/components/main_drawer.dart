@@ -1,5 +1,7 @@
+import 'package:appbasepe/blocs/theme.dart';
 import 'package:appbasepe/components/radio_form.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainDrawer extends StatefulWidget {
   @override
@@ -8,8 +10,8 @@ class MainDrawer extends StatefulWidget {
 
 class _MainDrawerState extends State<MainDrawer> {
   static const themeProps = [
-    {"label": "Light", "value": 0},
-    {"label": "Dark", "value": 1}
+    {"label": "Light", "value": ThemeProps.light},
+    {"label": "Dark", "value": ThemeProps.dark}
   ];
 
   static const fontProps = [
@@ -19,23 +21,26 @@ class _MainDrawerState extends State<MainDrawer> {
     {"label": 'Extra large', "value": 3}
   ];
 
-  num _themeValue = 0;
   num _fontValue = 0;
-
-  void _selectArticle(num item) {
-    setState(() {
-      _themeValue = item;
-    });
-  }
-
-  void _selectFont(num item) {
-    setState(() {
-      _fontValue = item;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeChanger>(context);
+    ThemeProps _themeValue = theme.getValueTheme();
+
+    void _selectArticle(Object item) {
+      setState(() {
+        _themeValue = item;
+      });
+      theme.setTheme(item);
+    }
+
+    void _selectFont(Object item) {
+      setState(() {
+        _fontValue = item;
+      });
+    }
+
     return Drawer(
       child: Scaffold(
         appBar: AppBar(
@@ -69,7 +74,7 @@ class _MainDrawerState extends State<MainDrawer> {
                         character: _themeValue,
                         handleSelect: _selectArticle,
                         radioProps: themeProps,
-                        row: true,
+                        orientation: OrientationProps.row,
                       ),
                       SizedBox(height: 10),
                       Text(
@@ -80,6 +85,7 @@ class _MainDrawerState extends State<MainDrawer> {
                         character: _fontValue,
                         handleSelect: _selectFont,
                         radioProps: fontProps,
+                        orientation: OrientationProps.column,
                       ),
                     ],
                   ),

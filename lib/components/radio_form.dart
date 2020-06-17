@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
+enum OrientationProps { row, column }
+
 class RadioForm extends StatelessWidget {
   final List<Map<String, Object>> radioProps;
-  final num character;
-  final void Function(int) handleSelect;
-  final bool row;
+  final Object character;
+  final void Function(Object) handleSelect;
+  final OrientationProps orientation;
 
   const RadioForm({
     @required this.character,
     @required this.handleSelect,
     @required this.radioProps,
-    this.row: false,
+    @required this.orientation,
   });
 
   List<Widget> loadRadio() {
@@ -37,7 +39,7 @@ class RadioForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (row) {
+    if (orientation == OrientationProps.row) {
       return Row(children: loadRadio());
     } else {
       return Column(
