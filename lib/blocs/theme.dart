@@ -1,59 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:appbasepe/data/custom_theme_data.dart';
 
 enum ThemeProps { light, dark }
+enum ThemeTextProps { small, medium }
 
 class ThemeChanger with ChangeNotifier {
-  ThemeChanger(ThemeData theme, TextTheme textTheme) {
-    final finalTheme = theme.copyWith(
-      textTheme: textTheme.apply(
-        bodyColor: Colors.black,
+  ThemeChanger(ThemeProps theme, ThemeTextProps textTheme) {
+    setTheme(theme, textTheme);
+  }
+
+  ThemeData _themeData;
+  ThemeProps _valueTheme;
+  ThemeTextProps _valueThemeText;
+
+  ThemeData getTheme() => _themeData;
+
+  ThemeProps getValueTheme() => _valueTheme;
+  ThemeTextProps getTextTheme() => _valueThemeText;
+
+  void setTheme(ThemeProps theme, ThemeTextProps textTheme) {
+    ThemeData dataTheme;
+    TextTheme dataThemeText;
+
+    switch (theme) {
+      case ThemeProps.light:
+        {
+          dataTheme = ligth;
+          _valueTheme = ThemeProps.light;
+        }
+        break;
+
+      case ThemeProps.dark:
+        {
+          dataTheme = dark;
+          _valueTheme = ThemeProps.dark;
+        }
+        break;
+    }
+
+    switch (textTheme) {
+      case ThemeTextProps.small:
+        {
+          dataThemeText = small;
+          _valueThemeText = ThemeTextProps.small;
+        }
+        break;
+
+      case ThemeTextProps.medium:
+        {
+          dataThemeText = medium;
+          _valueThemeText = ThemeTextProps.medium;
+        }
+        break;
+    }
+
+    final finalTheme = dataTheme.copyWith(
+      textTheme: dataThemeText.apply(
+        bodyColor: dataTheme.colorScheme.onPrimary,
       ),
     );
     _themeData = finalTheme;
-  }
-
-  static final small = TextTheme(
-    headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-    headline6: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
-    bodyText2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
-  );
-
-  static var ligth = ThemeData(
-    primaryColor: Color(0xFF508744),
-    scaffoldBackgroundColor: Color(0xFFF6F6F6),
-    cardColor: Color(0xFFFFFFFF),
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-  );
-
-  static final dark = ThemeData(
-    primaryColor: Color(0xFF508744),
-    scaffoldBackgroundColor: Color(0xFF091F18),
-    cardColor: Color(0xFF113026),
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    textTheme: TextTheme(
-      headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-      headline6: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
-      bodyText2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
-    ),
-  );
-
-  ThemeData _themeData;
-  ThemeProps _valueTheme = ThemeProps.light;
-
-  TextTheme _textThemeData = small;
-
-  ThemeData getTheme() => _themeData;
-  ThemeProps getValueTheme() => _valueTheme;
-
-  TextTheme getTextTheme() => _textThemeData;
-
-  void setTheme(ThemeProps value) {
-    this._valueTheme = value;
-    if (value == ThemeProps.light) {
-      this._themeData = ligth;
-    } else {
-      this._themeData = dark;
-    }
 
     notifyListeners();
   }

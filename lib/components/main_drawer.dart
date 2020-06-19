@@ -26,13 +26,13 @@ class _MainDrawerState extends State<MainDrawer> {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeChanger>(context);
-    ThemeProps _themeValue = theme.getValueTheme();
+    ThemeProps _valueTheme = theme.getValueTheme();
 
     void _selectArticle(Object item) {
       setState(() {
-        _themeValue = item;
+        _valueTheme = item;
       });
-      theme.setTheme(item);
+      theme.setTheme(item, item);
     }
 
     void _selectFont(Object item) {
@@ -71,7 +71,7 @@ class _MainDrawerState extends State<MainDrawer> {
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       RadioForm(
-                        character: _themeValue,
+                        character: _valueTheme,
                         handleSelect: _selectArticle,
                         radioProps: themeProps,
                         orientation: OrientationProps.row,
