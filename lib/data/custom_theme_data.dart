@@ -11,9 +11,10 @@ final ligth = ThemeData(
 );
 
 final dark = ThemeData(
-  primaryColor: Color(0xFF508744),
+  primaryColor: Color(0xFF0e3507),
   scaffoldBackgroundColor: Color(0xFF091F18),
   cardColor: Color(0xFF113026),
+  brightness: Brightness.dark,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   colorScheme: ThemeData().colorScheme.copyWith(
         onPrimary: Color(0xFFFFFFFF),
@@ -21,11 +22,25 @@ final dark = ThemeData(
 );
 
 final small = TextTheme(
+  headline5: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w500),
   headline6: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
   bodyText2: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
 );
 
 final medium = TextTheme(
+  headline5: TextStyle(fontSize: 26.0, fontWeight: FontWeight.w500),
   headline6: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w500),
   bodyText2: TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal),
+);
+
+final large = TextTheme(
+  headline5: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w500),
+  headline6: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w500),
+  bodyText2: TextStyle(fontSize: 18.0, fontWeight: FontWeight.normal),
+);
+
+final extraLarge = TextTheme(
+  headline5: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+  headline6: TextStyle(fontSize: 26.0, fontWeight: FontWeight.w500),
+  bodyText2: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
 );

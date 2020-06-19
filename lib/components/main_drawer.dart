@@ -10,35 +10,35 @@ class MainDrawer extends StatefulWidget {
 
 class _MainDrawerState extends State<MainDrawer> {
   static const themeProps = [
-    {"label": "Light", "value": ThemeProps.light},
-    {"label": "Dark", "value": ThemeProps.dark}
+    {"label": "Light", "value": ThemeColorProps.light},
+    {"label": "Dark", "value": ThemeColorProps.dark}
   ];
 
   static const fontProps = [
-    {"label": 'Small', "value": 0},
-    {"label": 'Medium', "value": 1},
-    {"label": 'Large', "value": 2},
-    {"label": 'Extra large', "value": 3}
+    {"label": 'Small', "value": ThemeTextProps.small},
+    {"label": 'Medium', "value": ThemeTextProps.medium},
+    {"label": 'Large', "value": ThemeTextProps.large},
+    {"label": 'Extra large', "value": ThemeTextProps.extraLarge}
   ];
-
-  num _fontValue = 0;
 
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeChanger>(context);
-    ThemeProps _valueTheme = theme.getValueTheme();
+    ThemeColorProps _valueTheme = theme.getThemeColor();
+    ThemeTextProps _valueThemeText = theme.getThemeText();
 
-    void _selectArticle(Object item) {
+    void _selectTheme(Object item) {
       setState(() {
         _valueTheme = item;
       });
-      theme.setTheme(item, item);
+      theme.setTheme(item, _valueThemeText);
     }
 
     void _selectFont(Object item) {
       setState(() {
-        _fontValue = item;
+        _valueThemeText = item;
       });
+      theme.setTheme(_valueTheme, item);
     }
 
     return Drawer(
@@ -72,7 +72,7 @@ class _MainDrawerState extends State<MainDrawer> {
                       ),
                       RadioForm(
                         character: _valueTheme,
-                        handleSelect: _selectArticle,
+                        handleSelect: _selectTheme,
                         radioProps: themeProps,
                         orientation: OrientationProps.row,
                       ),
@@ -82,7 +82,7 @@ class _MainDrawerState extends State<MainDrawer> {
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       RadioForm(
-                        character: _fontValue,
+                        character: _valueThemeText,
                         handleSelect: _selectFont,
                         radioProps: fontProps,
                         orientation: OrientationProps.column,

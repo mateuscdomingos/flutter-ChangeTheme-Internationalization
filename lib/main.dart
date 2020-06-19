@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ThemeChanger(ThemeProps.light, ThemeTextProps.small),
+      create: (_) => ThemeChanger(ThemeColorProps.light, ThemeTextProps.small),
       child: MaterialAppWithTheme(),
     );
   }

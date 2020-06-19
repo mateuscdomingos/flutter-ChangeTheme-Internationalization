@@ -1,39 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:appbasepe/data/custom_theme_data.dart';
 
-enum ThemeProps { light, dark }
-enum ThemeTextProps { small, medium }
+enum ThemeColorProps { light, dark }
+enum ThemeTextProps { small, medium, large, extraLarge }
 
 class ThemeChanger with ChangeNotifier {
-  ThemeChanger(ThemeProps theme, ThemeTextProps textTheme) {
+  ThemeChanger(ThemeColorProps theme, ThemeTextProps textTheme) {
     setTheme(theme, textTheme);
   }
 
-  ThemeData _themeData;
-  ThemeProps _valueTheme;
-  ThemeTextProps _valueThemeText;
+  ThemeData _themeData; // application theme
+  ThemeColorProps _valueThemeColor; // value application theme color
+  ThemeTextProps _valueThemeText; // value application text theme
 
-  ThemeData getTheme() => _themeData;
+  ThemeData getTheme() =>
+      _themeData; // used to apply the theme in the application
 
-  ThemeProps getValueTheme() => _valueTheme;
-  ThemeTextProps getTextTheme() => _valueThemeText;
+  ThemeColorProps getThemeColor() =>
+      _valueThemeColor; // used to know the theme color
 
-  void setTheme(ThemeProps theme, ThemeTextProps textTheme) {
+  ThemeTextProps getThemeText() =>
+      _valueThemeText; // used to know the text theme
+
+  void setTheme(ThemeColorProps theme, ThemeTextProps textTheme) {
     ThemeData dataTheme;
     TextTheme dataThemeText;
 
     switch (theme) {
-      case ThemeProps.light:
+      case ThemeColorProps.light:
         {
           dataTheme = ligth;
-          _valueTheme = ThemeProps.light;
+          _valueThemeColor = ThemeColorProps.light;
         }
         break;
 
-      case ThemeProps.dark:
+      case ThemeColorProps.dark:
         {
           dataTheme = dark;
-          _valueTheme = ThemeProps.dark;
+          _valueThemeColor = ThemeColorProps.dark;
         }
         break;
     }
@@ -52,8 +56,23 @@ class ThemeChanger with ChangeNotifier {
           _valueThemeText = ThemeTextProps.medium;
         }
         break;
+
+      case ThemeTextProps.large:
+        {
+          dataThemeText = large;
+          _valueThemeText = ThemeTextProps.large;
+        }
+        break;
+
+      case ThemeTextProps.extraLarge:
+        {
+          dataThemeText = extraLarge;
+          _valueThemeText = ThemeTextProps.extraLarge;
+        }
+        break;
     }
 
+    // merge theme and text theme
     final finalTheme = dataTheme.copyWith(
       textTheme: dataThemeText.apply(
         bodyColor: dataTheme.colorScheme.onPrimary,
