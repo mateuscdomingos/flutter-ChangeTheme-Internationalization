@@ -1,7 +1,9 @@
 import 'package:appbasepe/blocs/theme.dart';
+import 'package:appbasepe/core/internationalization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:appbasepe/screans/home_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,6 +28,24 @@ class MaterialAppWithTheme extends StatelessWidget {
       title: 'Flutter Demo',
       theme: theme.getTheme(),
       home: HomeScreen(),
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('pt', ''), // Portuguese, no country code
+        const Locale('en', ''), // English, no country code
+        const Locale('es', ''), // Spanish, no country code
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale.languageCode) {
+            return supportedLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
     );
   }
 }

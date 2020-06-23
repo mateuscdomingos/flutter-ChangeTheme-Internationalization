@@ -1,3 +1,4 @@
+import 'package:appbasepe/core/internationalization/app_translate.dart';
 import 'package:appbasepe/models/article.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class ArticleDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Article details'),
+        title: Text(AppTranslate(context).text("article_details")),
       ),
       body: Column(
         children: <Widget>[
