@@ -10,5 +10,9 @@
   "small": "Pequeno",
   "medium": "Médio",
   "large": "Grande",
-  "extra_large": "Extra Grande"
+  "extra_large": "Extra Grande",
+  "language": "Idioma",
+  "portuguese": "Português",
+  "english": "Inglês",
+  "spanish": "Espanhol"
 }

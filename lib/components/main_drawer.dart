@@ -1,3 +1,4 @@
+import 'package:appbasepe/blocs/language.dart';
 import 'package:appbasepe/blocs/theme.dart';
 import 'package:appbasepe/components/radio_form.dart';
 import 'package:appbasepe/core/internationalization/app_translate.dart';
@@ -20,6 +21,10 @@ class _MainDrawerState extends State<MainDrawer> {
     final strLarge = AppTranslate(context).text("large");
     final strExtraLarge = AppTranslate(context).text("extra_large");
 
+    final strPortuguese = AppTranslate(context).text("portuguese");
+    final strEnglish = AppTranslate(context).text("english");
+    final strSpanish = AppTranslate(context).text("spanish");
+
     final themeProps = [
       {"label": strLight, "value": ThemeColorProps.light},
       {"label": strDark, "value": ThemeColorProps.dark}
@@ -30,10 +35,18 @@ class _MainDrawerState extends State<MainDrawer> {
       {"label": strLarge, "value": ThemeTextProps.large},
       {"label": strExtraLarge, "value": ThemeTextProps.extraLarge}
     ];
+    final languageProps = [
+      {"label": strPortuguese, "value": LanguageProps.pt},
+      {"label": strEnglish, "value": LanguageProps.en},
+      {"label": strSpanish, "value": LanguageProps.es},
+    ];
 
     final theme = Provider.of<ThemeChanger>(context);
+    final language = Provider.of<LanguageChanger>(context);
+
     ThemeColorProps _valueTheme = theme.getThemeColor();
     ThemeTextProps _valueThemeText = theme.getThemeText();
+    LanguageProps _valueLanguage = language.getValueLanguage();
 
     void _selectTheme(Object item) {
       setState(() {
@@ -47,6 +60,13 @@ class _MainDrawerState extends State<MainDrawer> {
         _valueThemeText = item;
       });
       theme.setTheme(_valueTheme, item);
+    }
+
+    void _selectLanguage(Object item) {
+      setState(() {
+        _valueLanguage = item;
+      });
+      language.setLanguage(item);
     }
 
     return Drawer(
@@ -93,6 +113,17 @@ class _MainDrawerState extends State<MainDrawer> {
                         character: _valueThemeText,
                         handleSelect: _selectFont,
                         radioProps: fontProps,
+                        orientation: OrientationProps.column,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        AppTranslate(context).text("language"),
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      RadioForm(
+                        character: _valueLanguage,
+                        handleSelect: _selectLanguage,
+                        radioProps: languageProps,
                         orientation: OrientationProps.column,
                       ),
                     ],

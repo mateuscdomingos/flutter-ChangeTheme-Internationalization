@@ -1,3 +1,4 @@
+import 'package:appbasepe/blocs/language.dart';
 import 'package:appbasepe/blocs/theme.dart';
 import 'package:appbasepe/core/internationalization/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,16 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => ThemeChanger(ThemeColorProps.light, ThemeTextProps.small),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) =>
+              ThemeChanger(ThemeColorProps.light, ThemeTextProps.small),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LanguageChanger(LanguageProps.pt),
+        ),
+      ],
       child: MaterialAppWithTheme(),
     );
   }
