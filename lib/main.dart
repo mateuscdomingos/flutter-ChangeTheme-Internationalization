@@ -32,13 +32,14 @@ class MaterialAppWithTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeChanger>(context);
+    final applocalizationsdelegate = AppLocalizations.teste(context);
 
     return MaterialApp(
       title: 'Flutter Demo',
       theme: theme.getTheme(),
       home: HomeScreen(),
       localizationsDelegates: [
-        AppLocalizations.delegate,
+        applocalizationsdelegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],

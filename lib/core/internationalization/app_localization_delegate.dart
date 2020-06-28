@@ -1,9 +1,12 @@
+import 'package:appbasepe/blocs/language.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'app_localizations.dart';
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
-  const AppLocalizationsDelegate();
+  final BuildContext context;
+  const AppLocalizationsDelegate(this.context);
 
   @override
   bool isSupported(Locale locale) {
@@ -12,11 +15,12 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    var localizations = AppLocalizations(Locale('en', 'BR'));
+    final language = Provider.of<LanguageChanger>(context);
+    var localizations = AppLocalizations(language.getLanguage());
     await localizations.load();
     return localizations;
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<AppLocalizations> old) => false;
+  bool shouldReload(LocalizationsDelegate<AppLocalizations> old) => true;
 }

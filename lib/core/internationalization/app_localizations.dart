@@ -27,10 +27,11 @@ class AppLocalizations {
     return _localizationsStrings[key];
   }
 
+  static LocalizationsDelegate<AppLocalizations> teste(BuildContext context) {
+    return AppLocalizationsDelegate(context);
+  }
+
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
-
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      AppLocalizationsDelegate();
 }
