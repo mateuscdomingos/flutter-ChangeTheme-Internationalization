@@ -7,6 +7,7 @@ final ligth = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   colorScheme: ThemeData().colorScheme.copyWith(
         onPrimary: Color(0xFF303030),
+        brightness: Brightness.light,
       ),
 );
 
@@ -14,10 +15,10 @@ final dark = ThemeData(
   primaryColor: Color(0xFF0e3507),
   scaffoldBackgroundColor: Color(0xFF091F18),
   cardColor: Color(0xFF113026),
-  brightness: Brightness.dark,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   colorScheme: ThemeData().colorScheme.copyWith(
         onPrimary: Color(0xFFFFFFFF),
+        brightness: Brightness.dark,
       ),
 );
 
